@@ -1,0 +1,52 @@
+.institution-calendar .react-calendar {
+    /* Customize the main calendar styles here */
+  }
+  .institution-calendar {
+    display: flex; /* Enable flexbox for centering */
+    justify-content: center; /* Horizontally center the calendar */
+    align-items: center; /* Vertically center the calendar (if needed) */
+    min-height: 50vh; /* Ensure there's enough height to center vertically */
+    /* Or, if you want to center within its parent: */
+    /* width: 100%; */ /* Make the calendar container take full width */
+  }
+  
+  .institution-calendar .react-calendar {
+    /* Additional calendar styles if necessary */
+    width: 80%;  /* Or a fixed width like 600px */
+    max-width: 600px; /* Optional: Set a maximum width */
+    margin: 20px auto; /* Center the calendar within its container */
+  }
+  
+  /* ... (rest of your CSS styles) */
+  
+  .institution-calendar .react-calendar__tile--active {
+    background: lightblue; /* Example: Highlight the selected date */
+  }
+  
+  .holiday {
+    background: lightcoral; /* Example: Color for holidays */
+  }
+  
+  .event {
+    background: lightgreen; /* Example: Color for events */
+  }
+  
+  .holiday-label, .event-label {
+    font-size: smaller; /* Adjust as needed */
+    text-align: center;
+    padding: 2px;
+    color: black; /* Or a contrasting color */
+    border-radius: 4px; /* Optional: Rounded corners */
+    margin-top: 2px; /* Space between labels */
+    white-space: nowrap; /* Prevent labels from wrapping */
+    overflow: hidden;  /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) for overflow */
+  }
+  
+  .holiday-label {
+    background-color: rgba(255, 0, 0, 0.5); /* Red with some transparency */
+  }
+  
+  .event-label {
+    background-color: rgba(0, 255, 0, 0.5); /* Green with some transparency */
+  }

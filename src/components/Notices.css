@@ -1,0 +1,37 @@
+.notices-container {
+    font-family: sans-serif;
+    padding: 20px;
+  }
+  
+  .notices-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .notice-item {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .notice-item h3 {
+    margin-top: 0; /* Remove default margin from h3 */
+  }
+  
+  .notice-date {
+    font-size: smaller;
+    color: #777;
+    margin-top: 5px;
+  }
+  
+  .loading {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+  }
