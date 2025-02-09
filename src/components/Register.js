@@ -2,40 +2,39 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Login.css";
+import "./Register.css";
 
-const Login = () => {
+const Register = () => {
   const [prn, setPrn] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setMessage("");
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/hms/api/login",
-        { prn, password },
-        { withCredentials: true }
+        "http://localhost:8080/hms/api/register",
+        { prn, password }
       );
 
-      if (response.data === "Login successful") {
-        sessionStorage.setItem("prn", prn); // ✅ Store PRN for session
-        navigate("/home"); // ✅ Redirect to Home page
+      if (response.data === "User registered successfully") {
+        setMessage("Registration successful! Redirecting to login...");
+        setTimeout(() => navigate("/"), 2000);
       } else {
         setMessage(response.data);
       }
     } catch (error) {
-      setMessage("Error: Unable to login.");
+      setMessage("Error: Unable to register.");
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>CDAC Girls Hostel Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="register-container">
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
         <div className="form-group">
           <label>PRN Number</label>
           <input
@@ -56,28 +55,16 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Login</button>
+        <button type="submit" className="btn btn-success">Register</button>
 
-        {/* Register Link */}
         <p className="mt-3">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <button
             type="button"
-            className="btn btn-success"
-            onClick={() => navigate("/register")}
+            className="btn btn-primary"
+            onClick={() => navigate("/")}
           >
-            Register here
-          </button>
-        </p>
-
-        {/* Admin Login Button */}
-        <p className="mt-3">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => navigate("/adminlogin")}
-          >
-            Admin Login
+            Login here
           </button>
         </p>
 
@@ -87,4 +74,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

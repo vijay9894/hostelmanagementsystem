@@ -1,65 +1,66 @@
+/* Center the login form */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-  }
-  
-  .login-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .login-box h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-  }
-  
-  .btn-primary {
-    width: 100%;
-    padding: 0.5rem;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  .forgot-password {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .forgot-password a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .forgot-password a:hover {
-    text-decoration: underline;
-  }
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+}
+
+/* Input fields */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Login button */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+/* Register button */
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Error message */
+.text-danger {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+

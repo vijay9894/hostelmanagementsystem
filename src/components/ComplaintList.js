@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import "./StudentList.css";
 import axios from 'axios';
 
 const ComplaintList = () => {
   const [complaints, setComplaints] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:8080/hms/api/complaints')
@@ -18,7 +21,12 @@ const ComplaintList = () => {
 
   return (
     <div className="container mt-5">
+      <div className="header">
       <h2 className="mb-4">Complaints List</h2>
+      <button className="btn btn-secondary back-button" onClick={() => navigate('/adminhome')}>
+          Back To Home
+        </button>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>

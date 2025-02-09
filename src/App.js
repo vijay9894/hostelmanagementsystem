@@ -14,6 +14,10 @@ import { useState } from 'react';
 import RoomList from './components/RoomList';
 import ComplaintList from './components/ComplaintList';
 import NoticeForm from './components/NoticeForm';
+import PermissionsList from './components/PermissionList';
+import PermissionsListPage from './components/PermissionsListPage';
+import Register from './components/Register';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 
@@ -23,13 +27,16 @@ function App() {
     setStudents([...students , newStudent]);
   }
   return (
-     <Routes>
+     <Routes> 
          <Route path="/" element={<Login />} />
+         <Route path="/register" element={<Register/>} />
+         <Route element={<PrivateRoute />}>
          <Route path="/home" element={<Home />} />
          <Route path="/profile" element={<Profile></Profile>}/>
          <Route path="/cdac-calendar" element={<InstitutionCalendar/>}/>
          <Route path="notices" element={<Notices/>}/>
          <Route path="/permission" element={<PermissionPage/>}/>
+         <Route path="/permissions" element={<PermissionsListPage/>}/>
          <Route path = "/complaints" element={<ComplaintPage/>}/>
          <Route path="/adminlogin" element={<AdminLogin/>}/>
          <Route path="/adminhome" element={<AdminHome/>} />
@@ -39,6 +46,9 @@ function App() {
          <Route path="/roomvacancies" element={<RoomList/>}/>
          <Route path="/admincomplaints" element={<ComplaintList/>}/>
          <Route path="/adminnotices" element={<NoticeForm/>}/>
+         <Route path="/adminpermission" element={<PermissionsList/>}/>
+         </Route>
+         
      </Routes>
   );
 }

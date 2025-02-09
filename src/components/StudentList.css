@@ -1,0 +1,6 @@
+.header {
+    display: flex;
+    justify-content: space-between; /* Positions items at opposite ends */
+    align-items: center;        /* Vertically aligns items */
+    margin-bottom: 20px;       /* Adds space below the header */
+  }

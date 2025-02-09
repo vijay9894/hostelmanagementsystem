@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button, Card, CardBody, CardTitle, Alert } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ComplaintPage = () => {
   const [complaint, setComplaint] = useState({
@@ -11,15 +12,21 @@ const ComplaintPage = () => {
     subject: '',
     date: new Date().toLocaleDateString()
   });
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const PRN_NUMBER = '240850325040'; // Replace with actual PRN number
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const storedPrn = sessionStorage.getItem("prn");
+    if (!storedPrn) {
+      navigate("/login");
+      return;
+    }
+
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/hms/api/students/${PRN_NUMBER}`);
-        console.log('Data fetched:', response.data);
+        const response = await axios.get(`http://localhost:8080/hms/api/students/${storedPrn}`);
         setComplaint({
           ...complaint,
           name: response.data.name,
@@ -27,13 +34,12 @@ const ComplaintPage = () => {
           room: response.data.roomNo
         });
       } catch (error) {
-        console.error("Error fetching data:", error);
         setError(error.message);
       }
     };
 
     fetchData();
-  }, [PRN_NUMBER]);
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,20 +49,17 @@ const ComplaintPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/hms/api/complaints', complaint);
-      console.log('Complaint submitted:', response.data);
+      await axios.post('http://localhost:8080/hms/api/complaints', complaint);
       setSuccess(true);
       setError(null);
-      // Clear the form fields
       setComplaint({
-        name: '',
-        prn: '',
-        room: '',
+        name: complaint.name,
+        prn: complaint.prn,
+        room: complaint.room,
         subject: '',
         date: new Date().toLocaleDateString()
       });
     } catch (error) {
-      console.error('Error submitting complaint:', error);
       setError('Error submitting complaint');
       setSuccess(false);
     }
@@ -64,47 +67,36 @@ const ComplaintPage = () => {
 
   return (
     <Container className="mt-5">
-      <Card>
+      <Card className="shadow-lg rounded-4 p-4">
         <CardBody>
-          <CardTitle tag="h3" className="mb-4">Submit a Complaint</CardTitle>
-          {success && <Alert color="success">Complaint submitted successfully!</Alert>}
-          {error && <Alert color="danger">{error}</Alert>}
+          {/* Title & Back Button */}
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <CardTitle tag="h3" className="text-primary fw-bold">📢 Submit a Complaint</CardTitle>
+            <Button color="info" className="fw-bold" onClick={() => navigate('/home')}>
+              ⬅ Back to Home
+            </Button>
+          </div>
+
+          {/* Alerts */}
+          {success && <Alert color="success">✅ Complaint submitted successfully!</Alert>}
+          {error && <Alert color="danger">❌ {error}</Alert>}
+
+          {/* Complaint Form */}
           <Form onSubmit={handleSubmit}>
             <FormGroup>
-              <Label for="name">Name:</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                value={complaint.name}
-                onChange={handleChange}
-                readOnly
-              />
+              <Label for="name">👤 Name:</Label>
+              <Input type="text" name="name" id="name" value={complaint.name} readOnly />
             </FormGroup>
             <FormGroup>
-              <Label for="prn">PRN:</Label>
-              <Input
-                type="text"
-                name="prn"
-                id="prn"
-                value={complaint.prn}
-                onChange={handleChange}
-                readOnly
-              />
+              <Label for="prn">🎓 PRN:</Label>
+              <Input type="text" name="prn" id="prn" value={complaint.prn} readOnly />
             </FormGroup>
             <FormGroup>
-              <Label for="room">Room No:</Label>
-              <Input
-                type="text"
-                name="room"
-                id="room"
-                value={complaint.room}
-                onChange={handleChange}
-                required
-              />
+              <Label for="room">🏠 Room No:</Label>
+              <Input type="text" name="room" id="room" value={complaint.room} readOnly />
             </FormGroup>
             <FormGroup>
-              <Label for="subject">Subject:</Label>
+              <Label for="subject">✍️ Subject:</Label>
               <Input
                 type="textarea"
                 name="subject"
@@ -116,16 +108,10 @@ const ComplaintPage = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="date">Date:</Label>
-              <Input
-                type="text"
-                name="date"
-                id="date"
-                value={complaint.date}
-                readOnly
-              />
+              <Label for="date">📅 Date:</Label>
+              <Input type="text" name="date" id="date" value={complaint.date} readOnly />
             </FormGroup>
-            <Button color="primary" type="submit">Submit</Button>
+            <Button color="primary" type="submit" className="fw-bold">🚀 Submit</Button>
           </Form>
         </CardBody>
       </Card>

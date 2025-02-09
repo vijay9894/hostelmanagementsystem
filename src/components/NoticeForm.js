@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import "./StudentList.css";
 import NoticeList from './NoticeList';
 
 
 const NoticeForm = () => {
   const [notice, setNotice] = useState({ noticeContent: '', noticeDate: '' });
   const [showNotices, setShowNotices] = useState(false);
-
+  const navigate = useNavigate(); 
   const handleChange = (e) => {
     setNotice({ ...notice, [e.target.name]: e.target.value });
   };
@@ -29,7 +31,12 @@ const NoticeForm = () => {
 
   return (
     <div className="container mt-5">
+      <div className="header">
       <h2 className="mb-4">Post a New Notice</h2>
+      <button className="btn btn-secondary back-button" onClick={() => navigate('/adminhome')}>
+          Back To Home
+        </button>
+      </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="noticeContent">
           <Form.Label>Notice Content</Form.Label>
