@@ -30,6 +30,7 @@ function App() {
      <Routes> 
          <Route path="/" element={<Login />} />
          <Route path="/register" element={<Register/>} />
+         <Route path="/login" element={<AdminLogin/>}/>
          <Route element={<PrivateRoute />}>
          <Route path="/home" element={<Home />} />
          <Route path="/profile" element={<Profile></Profile>}/>
@@ -38,7 +39,7 @@ function App() {
          <Route path="/permission" element={<PermissionPage/>}/>
          <Route path="/permissions" element={<PermissionsListPage/>}/>
          <Route path = "/complaints" element={<ComplaintPage/>}/>
-         <Route path="/adminlogin" element={<AdminLogin/>}/>
+         
          <Route path="/adminhome" element={<AdminHome/>} />
          <Route path="/studentlist" element={<StudentList/>} />
          {/* <Route path="/add-student" element={<AddStudent/>} /> */}
@@ -47,8 +48,7 @@ function App() {
          <Route path="/admincomplaints" element={<ComplaintList/>}/>
          <Route path="/adminnotices" element={<NoticeForm/>}/>
          <Route path="/adminpermission" element={<PermissionsList/>}/>
-         </Route>
-         
+         </Route>    
      </Routes>
   );
 }

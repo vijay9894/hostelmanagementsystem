@@ -72,13 +72,7 @@ const Login = () => {
 
         {/* Admin Login Button */}
         <p className="mt-3">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => navigate("/adminlogin")}
-          >
-            Admin Login
-          </button>
+        <button onClick={() => navigate("/login")}>Admin Login</button>
         </p>
 
         {message && <p className="text-danger mt-2">{message}</p>}
